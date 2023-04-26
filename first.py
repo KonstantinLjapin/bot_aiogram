@@ -2,4 +2,4 @@ import requests
 
 url = ""
 response = requests.get("http://numbersapi.com/43")
-print(response.text)
+print(response.text.json())
