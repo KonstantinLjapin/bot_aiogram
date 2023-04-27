@@ -1,6 +1,6 @@
 # bot_aiogram
 
-TODO write some start doc
+#TODO write some start doc
 - <=Python3.10
 - iogram_bot
 - pip install -r requirements.txt
