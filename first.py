@@ -1,5 +1,15 @@
-import requests
+a = "Hello"
+b = "Hello"
 
-url = ""
-response = requests.get("http://numbersapi.com/43")
-print(response.text.json())
+print(id(a), id(b))
+print(a is b)
+print(a in b)
+print(a == b)
+
+b = b[:-1] + "o"
+print(b)
+
+print(id(a), id(b))
+print(a is b)
+print(a in b)
+print(a == b)
