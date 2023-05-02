@@ -1,15 +1,12 @@
-a = "Hello"
-b = "Hello"
 
-print(id(a), id(b))
-print(a is b)
-print(a in b)
-print(a == b)
 
-b = b[:-1] + "o"
-print(b)
+def anonymous_filter(some_list):
+    sum_23 = 0
+    for i in some_list:
+        if i.isalpha():
+            if i.lower() == 'я':
+                sum_23 += 1
+    return sum_23 >= 23
 
-print(id(a), id(b))
-print(a is b)
-print(a in b)
-print(a == b)
+
+print(anonymous_filter('яяяяяяяяяяяяяяяяяяяяяяяя, яяяяяяяяяяяяяяяя и яяяяяяяя тоже!'))
