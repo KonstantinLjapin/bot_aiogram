@@ -1,4 +1,5 @@
-from iogram_bot.config_data.config import bot_dispatcher, bot
+import asyncio
+from iogram_bot.config_data.config import main
 
 if __name__ == '__main__':
-    bot_dispatcher.run_polling(bot)
+    asyncio.run(main())
