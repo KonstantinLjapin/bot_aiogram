@@ -1,6 +1,7 @@
 import os
 from aiogram import Bot, Dispatcher
 from dotenv import load_dotenv, find_dotenv
+from ..button import set_main_menu
 from ..handlers import call
 
 
@@ -19,4 +20,5 @@ async def main():
 
     # Пропускаем накопившиеся апдейты и запускаем polling
     await bot.delete_webhook(drop_pending_updates=True)
+    await set_main_menu(bot)
     await bot_dispatcher.start_polling(bot)
