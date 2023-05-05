@@ -15,7 +15,7 @@ async def process_start_command(message: Message):
     await message.answer(text='Hello!\nits button command\n'
                               'q-request\n'
                               'z-share geo,contact, add request',
-                         reply_markup=button.my_keyboard)
+                         reply_markup=button.func_keyboard)
     log.bot_log(message.message_id)
 
 
@@ -60,7 +60,7 @@ async def process_cucumber_answer(message: Message):
 @router.message(Text(text='z'))
 async def process_start_command(message: Message):
     await message.answer(text='Экспериментируем со специальными кнопками',
-                         reply_markup=button.my_keyboard)
+                         reply_markup=button.keyboard_z)
 
 
 @router.message()
