@@ -12,8 +12,10 @@ router: Router = Router()
 # Этот хэндлер будет срабатывать на команду "/start"
 @router.message(Command(commands=["start", 'help']))
 async def process_start_command(message: Message):
-    await message.answer(text='Hello!\nits button command',
-                         reply_markup=button.func_keyboard)
+    await message.answer(text='Hello!\nits button command\n'
+                              'q-request\n'
+                              'z-share geo,contact, add request',
+                         reply_markup=button.my_keyboard)
     log.bot_log(message.message_id)
 
 
@@ -22,7 +24,9 @@ async def process_start_command(message: Message):
                                     ContentType.VIDEO,
                                     ContentType.ANIMATION,
                                     ContentType.STICKER,
-                                    ContentType.PHOTO}))
+                                    ContentType.PHOTO,
+                                    ContentType.LOCATION,
+                                    ContentType.CONTACT}))
 async def process_send_vovite(message: Message):
     await message.answer(text='Вы прислали контент который пока не поддерживается')
     log.bot_log(message.message_id)
@@ -50,6 +54,13 @@ async def process_cucumber_answer(message: Message):
     await message.answer(text='Да, иногда кажется, что огурцов '
                               'кошки боятся больше',
                          reply_markup=ReplyKeyboardRemove())
+
+
+# Этот хэндлер будет срабатывать на команду "/start"
+@router.message(Text(text='z'))
+async def process_start_command(message: Message):
+    await message.answer(text='Экспериментируем со специальными кнопками',
+                         reply_markup=button.my_keyboard)
 
 
 @router.message()
