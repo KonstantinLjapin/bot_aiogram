@@ -1,7 +1,7 @@
 from aiogram.types import (KeyboardButton, ReplyKeyboardMarkup, KeyboardButtonPollType)
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 import random
-
+from typing import Any
 # Создаем объекты кнопок
 button_dog: KeyboardButton = KeyboardButton(text='Собак 🦮')
 button_cucumber: KeyboardButton = KeyboardButton(text='Огурцов 🥒')
@@ -49,8 +49,8 @@ captcha_btn: KeyboardButton = KeyboardButton(
 # button_captcha
 def captcha_keys(temp: int) -> list:
     """
-
-    :param temp:
+     Take answer, generate objekt buttons, return list "buttons"
+    :param temp: int answer of the captcha
     :return: list of "KeyboardButton" with answer
     """
     temp = str(temp)
@@ -62,14 +62,27 @@ def captcha_keys(temp: int) -> list:
         text='joke')
     last_button: KeyboardButton = KeyboardButton(
         text='joke')
-
-    return [first_button, next_button, next_last_button, last_button]
+    out_list = [first_button, next_button, next_last_button, last_button]
+    random.shuffle(out_list)
+    return out_list
 
 
 # Добавляем кнопки в билдер fun
 kb_builder.row(contact_btn, geo_btn, poll_btn, captcha_btn,  width=1)
 
 
+def gen_captcha_button_builder(temp: int) -> Any:
+    """trow int
+       add buttons"""
+    captcha_buttons = captcha_keys(temp)
+    for i in range(len(captcha_buttons)):
+        captcha_builder.add(captcha_buttons[i])
+
+    keyboard_captcha: ReplyKeyboardMarkup = captcha_builder.as_markup(
+        resize_keyboard=True,
+        one_time_keyboard=True)
+
+    return keyboard_captcha
 
 
 # Создаем объект клавиатуры
@@ -77,9 +90,6 @@ keyboard_z: ReplyKeyboardMarkup = kb_builder.as_markup(
                                     resize_keyboard=True,
                                     one_time_keyboard=True)
 
-keyboard_captcha: ReplyKeyboardMarkup =  captcha_builder.as_markup(
-                                    resize_keyboard=True,
-                                    one_time_keyboard=True)
 
 if __name__ == '__main__':
     pass
