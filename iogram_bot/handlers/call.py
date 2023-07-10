@@ -4,7 +4,7 @@ from aiogram.types import Message, ContentType, ReplyKeyboardRemove
 from aiogram import F
 from ..loggin import log
 from ..button import *
-
+from ..utils import captcha
 # Инициализируем роутер уровня модуля
 router: Router = Router()
 
@@ -62,6 +62,11 @@ async def process_start_command(message: Message):
     await message.answer(text='Экспериментируем со специальными кнопками',
                          reply_markup=button.keyboard_z)
 
+@router.message(Text(text='captcha'))
+async def process_start_command(message: Message):
+    await captcha.throw_captcha(message, 9)
+    await message.answer(text='answer too captcha',
+                         reply_markup=button.keyboard_captcha)
 
 @router.message()
 async def send_echo(message: Message):

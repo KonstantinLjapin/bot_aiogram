@@ -11,3 +11,7 @@ async def set_main_menu(bot: Bot):
                    description='Справка по работе бота')]
 
     await bot.set_my_commands(main_menu_commands)
+
+
+if __name__ == '__main__':
+    pass

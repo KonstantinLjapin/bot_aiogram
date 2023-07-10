@@ -1,5 +1,6 @@
 from aiogram.types import (KeyboardButton, ReplyKeyboardMarkup, KeyboardButtonPollType)
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
+import random
 
 # Создаем объекты кнопок
 button_dog: KeyboardButton = KeyboardButton(text='Собак 🦮')
@@ -8,7 +9,7 @@ button_cucumber: KeyboardButton = KeyboardButton(text='Огурцов 🥒')
 # Создаем объекты кнопок команд
 button_1: KeyboardButton = KeyboardButton(text='q')
 button_2: KeyboardButton = KeyboardButton(text='z')
-button_3: KeyboardButton = KeyboardButton(text='not exist')
+button_3: KeyboardButton = KeyboardButton(text='captcha')
 button_4: KeyboardButton = KeyboardButton(text='not exist')
 button_5: KeyboardButton = KeyboardButton(text='not exist')
 button_6: KeyboardButton = KeyboardButton(text='not exist')
@@ -30,8 +31,8 @@ func_keyboard: ReplyKeyboardMarkup = ReplyKeyboardMarkup(
 
 # Инициализируем билдер
 kb_builder: ReplyKeyboardBuilder = ReplyKeyboardBuilder()
-
-# Создаем кнопки
+captcha_builder: ReplyKeyboardBuilder = ReplyKeyboardBuilder()
+# Создаем кнопки kb_bilder
 contact_btn: KeyboardButton = KeyboardButton(
                                 text='Отправить телефон',
                                 request_contact=True)
@@ -41,13 +42,44 @@ geo_btn: KeyboardButton = KeyboardButton(
 poll_btn: KeyboardButton = KeyboardButton(
                                 text='Создать опрос/викторину',
                                 request_poll=KeyboardButtonPollType())
+captcha_btn: KeyboardButton = KeyboardButton(
+                                text='captcha')
 
-# Добавляем кнопки в билдер
-kb_builder.row(contact_btn, geo_btn, poll_btn, width=1)
+
+# button_captcha
+def captcha_keys(temp: int) -> list:
+    """
+
+    :param temp:
+    :return: list of "KeyboardButton" with answer
+    """
+    temp = str(temp)
+    first_button: KeyboardButton = KeyboardButton(
+        text=temp)
+    next_button: KeyboardButton = KeyboardButton(
+        text='joke')
+    next_last_button: KeyboardButton = KeyboardButton(
+        text='joke')
+    last_button: KeyboardButton = KeyboardButton(
+        text='joke')
+
+    return [first_button, next_button, next_last_button, last_button]
+
+
+# Добавляем кнопки в билдер fun
+kb_builder.row(contact_btn, geo_btn, poll_btn, captcha_btn,  width=1)
+
+
+
 
 # Создаем объект клавиатуры
 keyboard_z: ReplyKeyboardMarkup = kb_builder.as_markup(
                                     resize_keyboard=True,
                                     one_time_keyboard=True)
 
+keyboard_captcha: ReplyKeyboardMarkup =  captcha_builder.as_markup(
+                                    resize_keyboard=True,
+                                    one_time_keyboard=True)
 
+if __name__ == '__main__':
+    pass
